@@ -1,26 +1,30 @@
-import { Command, Ctx, Hears, Start, Update, Sender } from 'nestjs-telegraf';
-import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
+import { Command, Ctx, Start, Update, Sender } from 'nestjs-telegraf';
+// import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
 import { Context } from '../interfaces/context.interface';
-import { HELLO_SCENE_ID } from '../app.constants';
-import { UpdateType } from '../common/decorators/update-type.decorators';
+import { CREATE_SCENE_ID } from '../app.constants';
 
 @Update()
 export class CreatorUpdate {
   @Start()
-  onStart(): string {
-    return 'Say hello to me';
+  onStart(@Sender('first_name') firstName: string): string {
+    return `Hey ${firstName}! It's Subscribe Creator Bot.\n
+    Type /help to see the list of commands.`;
   }
 
-  @Hears(['hi', 'hello', 'hey', 'qq'])
-  onGreetings(
-    @UpdateType() updateType: TelegrafUpdateType,
-    @Sender('first_name') firstName: string,
-  ): string {
-    return `Hey ${firstName}`;
+  @Command('/help')
+  onHelp(): string {
+    return `Help commands: \n
+    /help - show this message.\n
+    /create - create post.\n`;
   }
 
-  @Command('scene')
-  async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
-    await ctx.scene.enter(HELLO_SCENE_ID);
+  @Command('/create')
+  async onCreate(@Ctx() ctx: Context) {
+    await ctx.scene.enter(CREATE_SCENE_ID);
   }
+
+  // @Command('scene')
+  // async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
+  //   await ctx.scene.enter(HELLO_SCENE_ID);
+  // }
 }
