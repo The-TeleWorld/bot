@@ -1,2 +1,27 @@
 creator:
-  start: Hey ${firstName}! It's Subscribe Creator Bot.\n Type /help to see the list of commands.
+      start:
+          welcomeText: Hello ${firstName}! Welcome to ${botName}.\n This bot allow automatically get paid for your content.\n Press button “Start” to begin!
+          channelNameText: First, specify the name of the channel and send it to bot.
+          genWalletText: This is your generated TON wallet:\n ${walletNumber} \n You need to make a minimum deposit of 0.5 TON for initialization of the contract.\n Don't worry, almost all the money will come back when you stop the *** bot
+          refLinkText: This is your referral link:\n ${refLink}\n You can share it with your subscribers.
+
+      createPost:
+          postTitle: Type the title of the post
+          postDiscription: Type the discription of the post
+          postPrice: Type the price of the post
+          
+      checkBalance:
+           balance: Your balance is ${balance}.\n Wallet address: ${walletNumber}
+  
+buttons:
+      btnPublish: Publish
+      btnBalance: Check Balance
+      btnBack: Back
+      btnLang: Change language
+      
+      
+subscriber:
+      start: Hello ${firstName}! Welcome to *** bot. This bot allow automatically get paid for own content. First, specify the name of the channel.
+
+
+
