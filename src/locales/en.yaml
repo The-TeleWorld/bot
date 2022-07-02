@@ -11,14 +11,13 @@ creator:
     postPrice: Type the price of the post
 
   checkBalance:
-    balance: Your balance is ${balance}.\n Wallet address: ${walletNumber}
+    balance: Your balance is ${balance}.\n Wallet address&#58; ${walletNumber}
 
 buttons:
   publish: Publish
   balance: Check Balance
   back: Back
   lang: Change language
-
 
 subscriber:
   start: Hello ${firstName}! Welcome to *** bot. This bot allow automatically get paid for own content. First, specify the name of the channel.
