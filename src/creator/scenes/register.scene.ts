@@ -1,4 +1,7 @@
-import { SubscriptionService } from './../../subscription/subscription.service';
+import {
+  SubscriptionService,
+  CreateSubscriptionDto,
+} from './../../subscription/subscription.service';
 import { Context, Ctx, Message, On, Wizard, WizardStep } from 'nestjs-telegraf';
 import { Markup } from 'telegraf';
 import TonWeb from 'tonweb';
@@ -51,11 +54,12 @@ export class RegisterWizard {
       .then((el) => el.toString(true, true, true));
 
     ctx.scene.state = {
-      creator_public_key: keypair.publicKey,
-      creator_private_key: keypair.secretKey,
+      creator_public_key: new TextDecoder().decode(keypair.publicKey),
+      creator_private_key: new TextDecoder().decode(keypair.secretKey),
+      creator_id: ctx.message.from.id,
       channel_name: name,
       wallet_address: walletAddress,
-    };
+    } as CreateSubscriptionDto;
 
     await ctx.reply(
       ctx.i18n.t('creator.start.genWalletText', {
@@ -87,8 +91,11 @@ export class RegisterWizard {
       const { username } = ctx.botInfo;
       const { id } = ctx.message.from;
       const link = `https://t.me/${username}?subj=${id}`;
+
+      this.subscriptionService.create(ctx.scene.state as CreateSubscriptionDto);
       await ctx.reply(
         ctx.i18n.t('creator.start.refLinkText', { refLink: link }),
+        Markup.keyboard([ctx.i18n.t('buttons.back')]).resize(),
       );
     }
 

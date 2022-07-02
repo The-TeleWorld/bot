@@ -3,13 +3,14 @@ import { Subscription } from './subscription.entity';
 
 export class CreateSubscriptionDto {
   creator_id: number;
-  subscriber_id: number;
+  subscriber_id?: number;
   creator_public_key: string;
   creator_private_key: string;
   channel_name: string;
-  subscriber_public_key: string;
-  subscriber_private_key: string;
-  state: string;
+  wallet_address: string;
+  subscriber_public_key?: string;
+  subscriber_private_key?: string;
+  state?: string;
 }
 
 class UpdateSubscriptionDto extends CreateSubscriptionDto {
