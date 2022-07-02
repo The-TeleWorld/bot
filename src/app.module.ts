@@ -6,6 +6,7 @@ import { CreatorModule } from './creator/creator.module';
 import { i18n } from './middleware/i18n.middleware';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { ContentModule } from './content/content.module';
+import { RegisterWizard } from './creator/scenes/register.scene';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { ContentModule } from './content/content.module';
     ContentModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [RegisterWizard],
 })
 export class AppModule {}

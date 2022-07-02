@@ -1,27 +1,32 @@
-import { Command, Ctx, Start, Update, Sender } from 'nestjs-telegraf';
-// import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
+import { Ctx, Message, On, Sender, Start, Update } from 'nestjs-telegraf';
+import { REGISTER_SCENE_ID } from 'src/app.constants';
+import { Markup } from 'telegraf';
 import { BotContext } from '../interfaces/context.interface';
-import { CREATE_SCENE_ID } from '../app.constants';
 
 @Update()
 export class CreatorUpdate {
   @Start()
-  onStart(
+  async onStart(
     @Sender('first_name') firstName: string,
     @Ctx() ctx: BotContext,
-  ): string {
-    return ctx.i18n.t('creator.start', { firstName });
+  ): Promise<void> {
+    console.log(ctx.message);
+    await ctx.reply(
+      ctx.i18n.t('creator.start.welcomeText', {
+        firstName,
+        botName: 'Nomadely.space',
+      }),
+      Markup.keyboard([ctx.i18n.t('buttons.register')])
+        .oneTime()
+        .resize(),
+    );
+    return;
   }
 
-  @Command('/help')
-  onHelp(): string {
-    return `Help commands: \n
-    /help - show this message.\n
-    /create - create post.\n`;
-  }
-
-  @Command('/create')
-  async onCreate(@Ctx() ctx: BotContext) {
-    await ctx.scene.enter(CREATE_SCENE_ID);
+  @On('text')
+  async onMessage(@Message('text') text: string, @Ctx() ctx: BotContext) {
+    if (text === ctx.i18n.t('buttons.register')) {
+      await ctx.scene.enter(REGISTER_SCENE_ID);
+    }
   }
 }
