@@ -10,7 +10,7 @@ export class CreatorUpdate {
     @Sender('first_name') firstName: string,
     @Ctx() ctx: BotContext,
   ): string {
-    return ctx.i18n.t('creatorStart', { firstName });
+    return ctx.i18n.t('creator.start', { firstName });
   }
 
   @Command('/help')
