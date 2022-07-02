@@ -11,12 +11,32 @@ class CreateSubscriptionDto {
   state: string;
 }
 
+class UpdateSubscriptionDto extends CreateSubscriptionDto {
+  id: number;
+}
+
 @Injectable()
 export class SubscriptionService {
   async create(subscriptionDto: CreateSubscriptionDto) {
     const subscription = await Subscription.create({ ...subscriptionDto });
 
     await subscription.save();
+
+    return subscription;
+  }
+
+  async update(subscriptionDto: UpdateSubscriptionDto) {
+    const { id, ...restKeys } = subscriptionDto;
+
+    const subscription = await Subscription.findOneBy({ id });
+
+    for (const key in restKeys) {
+      if (key in subscription) {
+        subscription[key] = subscriptionDto[key];
+      }
+    }
+
+    subscription.save();
 
     return subscription;
   }
