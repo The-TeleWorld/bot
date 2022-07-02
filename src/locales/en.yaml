@@ -18,6 +18,15 @@ buttons:
   balance: Check Balance
   back: Back
   lang: Change language
+  read: Open a Post - ${price}
 
 subscriber:
-  start: Hello ${firstName}! Welcome to *** bot. This bot allow automatically get paid for own content. First, specify the name of the channel.
+  welcomeText: Hello ${firstName}! Welcome to ${botName} bot.\n This bot allow you to pay for any content you want.
+  activateSubText: To activate a subscription, you need to have at least 2 TON on your wallet.\n Wallet number ${subWalletNumber}.
+  subText: Subscription has been successfully completed!\n Your balance is ${balance}.\n We will notify you of new posts!
+  
+  new post:
+     newPostNotif: ${creator} the creator published a new post.\n Title ${title}.\n Description ${description}.\n Price ${price}.\n Check it out
+  
+  
+  
