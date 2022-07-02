@@ -2,7 +2,7 @@ import {
   SubscriptionService,
   CreateSubscriptionDto,
 } from './../../subscription/subscription.service';
-import { Context, Ctx, Message, On, Wizard, WizardStep } from 'nestjs-telegraf';
+import { Context, Message, Wizard, WizardStep } from 'nestjs-telegraf';
 import { Markup } from 'telegraf';
 import TonWeb from 'tonweb';
 import { generateMnemonic, mnemonicToKeyPair } from 'tonweb-mnemonic';
