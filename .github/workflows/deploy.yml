@@ -9,9 +9,19 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Pull and restart server
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Get branch name
+        shell: bash
+        run: echo BRANCH_NAME=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV
+
       - name: Cache packages
         uses: actions/cache@v2
         with:
@@ -24,6 +34,7 @@ jobs:
       - name: Build app
         run: |
           npm run build
+
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
