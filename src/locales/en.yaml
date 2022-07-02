@@ -11,7 +11,7 @@ creator:
     postPrice: Type the price of the post
 
   checkBalance:
-    balance: Your balance is ${balance}.\n\nWallet address&#58; ${walletNumber}
+    balance: Your balance is ${balance}.\n\nWallet address':' ${walletNumber}
 
 buttons:
   publish: Publish
