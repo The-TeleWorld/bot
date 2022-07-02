@@ -7,6 +7,8 @@ import { i18n } from './middleware/i18n.middleware';
 import { SubscriptionModule } from './subscription/subscription.module';
 import { ContentModule } from './content/content.module';
 import { RegisterWizard } from './creator/scenes/register.scene';
+import { Content } from './content/content.entity';
+import { Creator } from './creator/creator.entity';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { RegisterWizard } from './creator/scenes/register.scene';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'tonworld.db',
-      entities: [],
+      entities: [Content, Creator],
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     CreatorModule,
