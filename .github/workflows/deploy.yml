@@ -9,19 +9,9 @@ on:
 
 jobs:
   build-and-deploy:
-    name: Build and deploy
+    name: Pull and restart server
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Get branch name
-        shell: bash
-        run: echo BRANCH_NAME=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV
-
       - name: Cache packages
         uses: actions/cache@v2
         with:
@@ -42,5 +32,6 @@ jobs:
 
       - name: Send to SSH
         run: |
-          scp -r ./* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/ton-bot
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'echo "BOT_TOKEN={{ secrets.BOT_TOKEN }}" > /root/ton-bot/.env; pm2 stop all; pm2 start /root/ton-bot/dist/main.js'
+          scp -r ./dist/* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/ton-bot/dist
+          scp ./package.json ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/ton-bot
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'cd /root/ton-bot; npm install; echo "BOT_TOKEN={{ secrets.BOT_TOKEN }}" > /root/ton-bot/.env; pm2 stop all; pm2 start /root/ton-bot/dist/main.js'
