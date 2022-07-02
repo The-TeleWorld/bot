@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { sessionMiddleware } from './middleware/session.middleware';
 import { CreatorModule } from './creator/creator.module';
 import { i18n } from './middleware/i18n.middleware';
@@ -29,7 +27,7 @@ import { ContentModule } from './content/content.module';
     SubscriptionModule,
     ContentModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
