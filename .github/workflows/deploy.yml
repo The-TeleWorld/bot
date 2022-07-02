@@ -1,0 +1,46 @@
+name: Build and deploy
+
+env:
+  NODE_VERSION: '14'
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Get branch name
+        shell: bash
+        run: echo BRANCH_NAME=${GITHUB_REF#refs/heads/} >> $GITHUB_ENV
+
+      - name: Cache packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ hashFiles('package-lock.json') }}
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Build app
+        run: |
+          npm run build
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          known_hosts: 'malyshev.pro,195.2.92.114 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBAxqO1p6Uv6BBKPkdqDFWcc+qLgHIrIkdvxBdcKufTaxJiUQ/KTas3OLZFpiVa006URirqta0WrCFe70xd1VTcY='
+
+      - name: Send to SSH
+        run: |
+          scp -r ./* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/root/ton-bot
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'echo "BOT_TOKEN={{ secrets.BOT_TOKEN }}" > /root/ton-bot/.env; pm2 stop all; pm2 start /root/ton-bot/dist/main.js'
