@@ -18,6 +18,8 @@ class UpdateSubscriptionDto extends CreateSubscriptionDto {
 
 @Injectable()
 export class SubscriptionService {
+  findOneBy = Subscription.findOneBy;
+
   async create(subscriptionDto: CreateSubscriptionDto) {
     const subscription = await Subscription.create({ ...subscriptionDto });
 

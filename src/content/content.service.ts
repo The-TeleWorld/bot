@@ -11,6 +11,8 @@ export class CreateContentDto {
 
 @Injectable()
 export class ContentService {
+  findOneBy = Content.findOneBy;
+
   async create(contentDto: CreateContentDto) {
     const content = await Content.create({ ...contentDto });
 
