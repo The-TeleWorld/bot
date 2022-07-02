@@ -1,4 +1,13 @@
-import { Scenes } from 'telegraf';
+/* eslint-disable @typescript-eslint/no-empty-interface */
+import { I18nContext } from '@grammyjs/i18n';
+import { Context, Scenes } from 'telegraf';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface Context extends Scenes.SceneContext {}
+interface MySceneSession extends Scenes.SceneSessionData {}
+
+interface MySession extends Scenes.SceneSession<MySceneSession> {}
+
+export interface BotContext extends Context {
+  readonly i18n: I18nContext;
+  session: MySession;
+  scene: Scenes.SceneContextScene<BotContext>;
+}

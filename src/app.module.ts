@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { sessionMiddleware } from './middleware/session.middleware';
 import { CreatorModule } from './creator/creator.module';
+import { i18n } from './middleware/i18n.middleware';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { CreatorModule } from './creator/creator.module';
       botName: 'Subscribe Creator',
       useFactory: () => ({
         token: process.env.BOT_TOKEN,
-        middlewares: [sessionMiddleware],
+        middlewares: [sessionMiddleware, i18n.middleware()],
         include: [CreatorModule],
       }),
     }),

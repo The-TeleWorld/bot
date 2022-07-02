@@ -1,14 +1,16 @@
 import { Command, Ctx, Start, Update, Sender } from 'nestjs-telegraf';
 // import { UpdateType as TelegrafUpdateType } from 'telegraf/typings/telegram-types';
-import { Context } from '../interfaces/context.interface';
+import { BotContext } from '../interfaces/context.interface';
 import { CREATE_SCENE_ID } from '../app.constants';
 
 @Update()
 export class CreatorUpdate {
   @Start()
-  onStart(@Sender('first_name') firstName: string): string {
-    return `Hey ${firstName}! It's Subscribe Creator Bot.\n
-    Type /help to see the list of commands.`;
+  onStart(
+    @Sender('first_name') firstName: string,
+    @Ctx() ctx: BotContext,
+  ): string {
+    return ctx.i18n.t('creatorStart', { firstName });
   }
 
   @Command('/help')
@@ -19,12 +21,7 @@ export class CreatorUpdate {
   }
 
   @Command('/create')
-  async onCreate(@Ctx() ctx: Context) {
+  async onCreate(@Ctx() ctx: BotContext) {
     await ctx.scene.enter(CREATE_SCENE_ID);
   }
-
-  // @Command('scene')
-  // async onSceneCommand(@Ctx() ctx: Context): Promise<void> {
-  //   await ctx.scene.enter(HELLO_SCENE_ID);
-  // }
 }
