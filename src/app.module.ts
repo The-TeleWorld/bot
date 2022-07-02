@@ -7,6 +7,7 @@ import { sessionMiddleware } from './middleware/session.middleware';
 import { CreatorModule } from './creator/creator.module';
 import { i18n } from './middleware/i18n.middleware';
 import { SubscriptionModule } from './subscription/subscription.module';
+import { ContentModule } from './content/content.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { SubscriptionModule } from './subscription/subscription.module';
     }),
     CreatorModule,
     SubscriptionModule,
+    ContentModule,
   ],
   controllers: [AppController],
   providers: [AppService],
