@@ -17,8 +17,8 @@ const toNano = TonWeb.utils.toNano;
 const providerUrl = process.env.TONWEB_URL;
 const apiKey = process.env.TONWEB_API;
 
-if (!providerUrl || !apiKey) {
-  throw new Error('TonWeb url or api key is not set');
+if (!providerUrl) {
+  throw new Error('TonWeb url is not set');
 }
 const tonweb = new TonWeb(new TonWeb.HttpProvider(providerUrl, { apiKey }));
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { FindOptionsWhere } from 'typeorm';
 import { Subscription } from './subscription.entity';
 
 export class CreateSubscriptionDto {
@@ -19,9 +20,25 @@ class UpdateSubscriptionDto extends CreateSubscriptionDto {
 
 @Injectable()
 export class SubscriptionService {
-  findOneBy = Subscription.findOneBy;
+  async findOneBy(where: FindOptionsWhere<Subscription>) {
+    const result = await Subscription.findOneBy(where);
+
+    if (!result) {
+      return null;
+    }
+
+    if (result.state) {
+      result.state = JSON.parse(result.state);
+    }
+
+    return result;
+  }
 
   async create(subscriptionDto: CreateSubscriptionDto) {
+    if (subscriptionDto.state) {
+      subscriptionDto.state = JSON.stringify(subscriptionDto.state);
+    }
+
     const subscription = await Subscription.create({ ...subscriptionDto });
 
     await subscription.save();
@@ -30,6 +47,10 @@ export class SubscriptionService {
   }
 
   async update(subscriptionDto: UpdateSubscriptionDto) {
+    if (subscriptionDto.state) {
+      subscriptionDto.state = JSON.stringify(subscriptionDto.state);
+    }
+
     const { id, ...restKeys } = subscriptionDto;
 
     const subscription = await Subscription.findOneBy({ id });
