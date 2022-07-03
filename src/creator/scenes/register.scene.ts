@@ -61,7 +61,7 @@ export class RegisterWizard {
       wallet_address: walletAddress,
     } as CreateSubscriptionDto;
 
-    await ctx.reply(
+    await ctx.replyWithHTML(
       ctx.i18n.t('creator.start.genWalletText', {
         walletAddress: walletAddress,
         botName: 'Asd',

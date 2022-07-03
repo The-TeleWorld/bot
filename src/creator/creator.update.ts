@@ -11,7 +11,7 @@ export class CreatorUpdate {
     @Ctx() ctx: BotContext,
   ): Promise<void> {
     console.log(ctx.message);
-    await ctx.reply(
+    await ctx.replyWithHTML(
       ctx.i18n.t('creator.start.welcomeText', {
         firstName,
         botName: 'Nomadely.space',

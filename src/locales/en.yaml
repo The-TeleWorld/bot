@@ -2,8 +2,8 @@ creator:
   start:
     welcomeText: Hello ${firstName} ✌🏻! Welcome to ${botName}.\n\nThis bot allow automatically get paid for your content.\n\nPress button “Register 🚧” to begin!
     channelNameText: First, type the name of the channel and send it to bot.
-    genWalletText: This is your generated TON wallet':';\n`${walletAddress}` \n\nYou need to make a minimum deposit of 0.5 TON for initialization of the contract.\n\nDon't worry, almost all the money will come back when you stop the ${botName}.
-    refLinkText: This is your referral link:\n\n${refLink}\n\nYou can share it with your subscribers.
+    genWalletText: This is your generated TON wallet \n\n`${walletAddress}` \n\nYou need to make a minimum deposit of 0.5 TON for initialization of the contract.\n\nDon't worry, almost all the money will come back when you stop the ${botName}.
+    refLinkText: This is your referral link \n\n${refLink} \n\nYou can share it with your subscribers.
 
   createPost:
     postTitle: Type the title of the post
@@ -11,22 +11,22 @@ creator:
     postPrice: Type the price of the post
 
   checkBalance:
-    balance: Your balance is ${balance}.\n\nWallet address':' `${walletNumber}`
-    low: The balance is not enough, пиздабол. Current balance':'; ${balance}, minimal required – ${min}
+    balance: Your balance is ${balance}. \n\nWallet address \n\n`${walletNumber}`
+    low: The balance is not enough 😕. \n\nCurrent balance – ${balance} TON \n\nMinimal required – ${min} TON
 
 buttons:
   publish: Publish 📝
   balance: Check Balance 💰
   back: Back ⬅️
   lang: Change language 🌐
-  read: Open a Post - ${price} 👀
+  read: Open a Post - ${price} 🔓
   register: Register 🚧
   sended: I have paid 💸
 
 subscriber:
-  welcomeText: Hello ${firstName} ✌🏻! Welcome to ${botName} bot.\n\nThis bot allow you to pay for any content you want.
-  activateSubText: To activate a subscription, you need to have at least 2 TON on your wallet.\n\nWallet number `${subWalletNumber}`.
-  subText: Subscription has been successfully completed!\n\nYour balance is ${balance}.\n\nWe will notify you of new posts!
+  welcomeText: Hello ${firstName} ✌🏻! Welcome to ${botName} bot. \n\nThis bot allow you to pay for any content you want.
+  activateSubText: To activate a subscription, you need to have at least 2 TON on your wallet. \n\nThis is your generated TON wallet:</b> `${subWalletNumber}`.
+  subText: Subscription has been successfully completed! \n\nYour balance is ${balance} TON. \n\nWe will notify you of new posts!
 
   new post:
-     newPostNotif: ${creator} published a new post.\n\nTitle ${title}.\n\nDescription ${description}.\n\nPrice ${price}.\n\nCheck it out 🙌🏻
+     newPostNotif: ${creator} published a new post. \n\nTitle ${title}. \n\nDescription ${description}. \n\nPrice ${price}.\n\nCheck it out 🙌🏻
