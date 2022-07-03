@@ -31,6 +31,6 @@ import { Creator } from './creator/creator.entity';
     ContentModule,
   ],
   controllers: [],
-  providers: [RegisterWizard],
+  providers: [],
 })
 export class AppModule {}
