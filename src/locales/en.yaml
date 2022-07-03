@@ -28,5 +28,7 @@ subscriber:
   activateSubText: To activate a subscription, you need to have at least 2 TON on your wallet. \n\n<b>This is your generated TON wallet:</b> <code>${walletAddress }</code>
   subText: Subscription has been successfully completed! \n\nYour balance is ${balance} TON. \n\nWe will notify you of new posts!
 
-  new post:
-     newPostNotif: ${creator} published a new post. \n\nTitle ${title}. \n\nDescription ${description}. \n\nPrice ${price}.\n\nCheck it out 🙌🏻
+  newPost:
+     notif: ${creator} published a new post. \n\nTitle ${title}. \n\nDescription ${description}. \n\nPrice ${price}.\n\nCheck it out 🙌🏻
+
+menu: Main menu

@@ -38,5 +38,21 @@ export class CreatorUpdate {
       const scene = ctx.session.author ? USER_SCENE_ID : REGISTER_SCENE_ID;
       await ctx.scene.enter(scene);
     }
+
+    if (text === ctx.i18n.t('buttons.back')) {
+      const keyboard = [
+        ctx.i18n.t('buttons.lang'),
+        ctx.i18n.t('buttons.balance'),
+      ];
+
+      if (!ctx.session.author) {
+        keyboard.push(ctx.i18n.t('buttons.publish'));
+      }
+      ctx.reply(
+        ctx.i18n.t('menu'),
+        Markup.keyboard(keyboard).oneTime().resize(),
+      );
+      return;
+    }
   }
 }
