@@ -1,6 +1,6 @@
 creator:
   start:
-    welcomeText: Hello ${firstName} ✌🏻! Welcome to ${botName}.\n\nThis bot allow automatically get paid for your content.\n\nPress button “Register 🚧” to begin!
+    welcomeText: Hello ${firstName} ✌🏻! Welcome to ${botName}.\n\nThis bot gives you the opportunity to introduce a new way to monetize your content. \n\nPress button “Register 🚧” to begin!
     channelNameText: First, type the name of the channel and send it to bot.
     genWalletText: This is your generated TON wallet \n\n <code>${walletAddress}</code> \n\nYou need to make a minimum deposit of 0.5 TON for initialization of the contract.\n\nDon't worry, almost all the money will come back when you stop the ${botName}.
     refLinkText: This is your referral link \n\n${refLink} \n\nYou can share it with your subscribers.
