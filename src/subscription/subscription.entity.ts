@@ -15,7 +15,7 @@ export class Subscription extends BaseEntity {
   @Column()
   creator_id: number;
 
-  @Column()
+  @Column({ nullable: true })
   subscriber_id: number;
 
   @Column()
@@ -24,13 +24,14 @@ export class Subscription extends BaseEntity {
   @Column()
   creator_private_key: string;
 
-  @Column()
+  @Column({ nullable: true })
   subscriber_public_key: string;
 
-  @Column()
+  @Column({ nullable: true })
   subscriber_private_key: string;
 
   @Column('text')
+  @Column({ nullable: true })
   state: string;
 
   @Column()

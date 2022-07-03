@@ -23,7 +23,7 @@ import { Creator } from './creator/creator.entity';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'tonworld.db',
-      entities: [Content, Creator],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: process.env.NODE_ENV !== 'production',
     }),
     CreatorModule,
