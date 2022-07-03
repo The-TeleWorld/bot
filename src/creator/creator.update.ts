@@ -23,7 +23,7 @@ export class CreatorUpdate {
     await ctx.replyWithHTML(
       ctx.i18n.t(responseText, {
         firstName,
-        botName: 'Nomadely.space',
+        botName: process.env.BOT_NAME,
       }),
       Markup.keyboard([ctx.i18n.t('buttons.register')])
         .oneTime()

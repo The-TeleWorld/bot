@@ -65,7 +65,7 @@ export class RegisterWizard {
     await ctx.replyWithHTML(
       ctx.i18n.t('creator.start.genWalletText', {
         walletAddress: walletAddress,
-        botName: 'Asd',
+        botName: process.env.BOT_NAME,
       }),
       Markup.keyboard([ctx.i18n.t('buttons.sended')]).resize(),
     );
