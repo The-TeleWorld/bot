@@ -8,7 +8,8 @@ export class CreateSubscriptionDto {
   creator_public_key: string;
   creator_private_key: string;
   channel_name: string;
-  wallet_address: string;
+  creator_wallet_address: string;
+  subscriber_wallet_address: string;
   subscriber_public_key?: string;
   subscriber_private_key?: string;
   state?: string;
