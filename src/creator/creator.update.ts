@@ -15,8 +15,8 @@ export class CreatorUpdate {
     ctx.session.author = payload;
 
     const responseText = payload
-      ? 'creator.start.welcomeText'
-      : 'subscriber.welcomeText';
+      ? 'subscriber.welcomeText'
+      : 'creator.start.welcomeText';
 
     await ctx.replyWithHTML(
       ctx.i18n.t(responseText, {
