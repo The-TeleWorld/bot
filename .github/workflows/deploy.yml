@@ -3,9 +3,9 @@ name: Build and deploy
 env:
   NODE_VERSION: '14'
 
-# on:
-#   push:
-#     branches: [master]
+on:
+  push:
+    branches: [master]
 
 jobs:
   build-and-deploy:
