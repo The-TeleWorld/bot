@@ -53,13 +53,14 @@ export class RegisterWizard {
       .getAddress()
       .then((el) => el.toString(true, true, true));
 
-    ctx.scene.state = {
+    ctx.session = {
+      ...ctx.session,
       creator_public_key: new TextDecoder().decode(keypair.publicKey),
       creator_private_key: new TextDecoder().decode(keypair.secretKey),
       creator_id: ctx.message.from.id,
       channel_name: name,
-      wallet_address: walletAddress,
-    } as CreateSubscriptionDto;
+      creator_wallet_address: walletAddress,
+    };
 
     await ctx.replyWithHTML(
       ctx.i18n.t('creator.start.genWalletText', {
@@ -79,8 +80,7 @@ export class RegisterWizard {
       return ctx.scene.leave();
     }
 
-    // @ts-ignore
-    const balance = await tonweb.getBalance(ctx.scene.state.wallet_address);
+    const balance = await tonweb.getBalance(ctx.session.creator_wallet_address);
     console.log(balance);
     if (new BN(balance).lt(toNano('0.5'))) {
       return ctx.i18n.t('creator.checkBalance.low', {
@@ -90,17 +90,14 @@ export class RegisterWizard {
     } else {
       const { username } = ctx.botInfo;
       const { id } = ctx.message.from;
-      const link = `https://t.me/${username}?subj=${id}`;
+      const link = `https://t.me/${username}?start=${id}`;
 
-      this.subscriptionService.create(ctx.scene.state as CreateSubscriptionDto);
+      this.subscriptionService.create(ctx.session as CreateSubscriptionDto);
       await ctx.reply(
         ctx.i18n.t('creator.start.refLinkText', { refLink: link }),
         Markup.keyboard([ctx.i18n.t('buttons.back')]).resize(),
       );
+      return ctx.scene.leave();
     }
-
-    return ctx.i18n.t('creator.checkBalance.low', {
-      balance: TonWeb.utils.fromNano(balance),
-    });
   }
 }
