@@ -12,9 +12,7 @@ export class CreatorUpdate {
   ): Promise<void> {
     const payload = (ctx as any).startPayload || '';
 
-    if (payload) {
-      ctx.session.author = payload;
-    }
+    ctx.session.author = payload;
 
     const responseText = payload
       ? 'creator.start.welcomeText'
